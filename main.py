@@ -16,10 +16,24 @@ def main() :
     for x in range(max_size_x) :
         for y in range(max_size_y) :
             if(img_pixels[x, y]) not in list_colors :
-                # list_colors.append(ImageColor.getcolor(img_pixels[x, y], 'RGB'))
+                list_colors.append(img_pixels[x, y])
                 pass
     
-    print(list_colors)
+    # print(list_colors)
+
+    img_res_size_x, img_res_size_y = 800, 800
+    img_res = Image.new("RGB", (img_res_size_x, img_res_size_y))
+    i = 0; j = 0
+    for color in list_colors :
+        for x in range(15) :
+            if i == img_res_size_x :
+                j += 1; i = 0
+            else :
+                img_res.putpixel((i, j), color)
+                print(i, j)
+            i += 1
+    
+    img_res.save("./output_image.jpg", "JPEG")
 
 if __name__ == "__main__":
     try :
